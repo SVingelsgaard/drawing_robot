@@ -1,0 +1,61 @@
+#screens in root "widget" WindowManager
+WindowManager:
+    StartScreen:
+    MainScreen:
+        id: mScreen
+
+#where the grapics is created
+
+<StartScreen>:
+
+    Label:
+        pos: 0, -100
+        text: "press to start"
+
+    Button:
+        size: root.size
+        opacity: 0
+        on_press:
+            app.runApp()
+            app.root.current = "mainScreen"
+
+<MainScreen>:
+    name: "mainScreen"
+    Image:
+        size: root.size
+        source: "pics/envirement.jpg"
+
+    FloatLayout:
+        Base:
+            source: "pics/Base.png"
+            pos: -500, 200
+            canvas.after:
+                Rotate:
+                    angle: 90
+                    origin: self.center
+
+        LegOne:
+            source: "pics/Leg.png"
+            pos: 0, 0
+            canvas.before:
+                Rotate:
+                    angle: 90
+                    origin: self.center
+
+        LegTwo:
+            source: "pics/Leg.png"
+            pos: 100, 0
+            canvas.before:
+                Rotate:
+                    angle: 90
+                    origin: self.center
+
+        #LegThree:
+            #id: legThree
+            #source: "pics/Leg.png"
+            #pos: 200, 0
+            #canvas:
+                #Rotate:
+                    #id: legThreeRot
+                    #angle: 180
+                    #origin: self.center

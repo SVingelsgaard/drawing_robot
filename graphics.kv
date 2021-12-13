@@ -1,0 +1,114 @@
+#screens in root "widget" WindowManager
+WindowManager:
+    StartScreen:
+    MainScreen:
+
+
+#where the grapics is created
+<StartScreen>:
+    Label:
+        pos: 0, -100
+        text: "press to start"
+
+    Button:
+        size: root.size
+        opacity: 0
+        on_release:
+            root.manager.transition.duration = '0'#fyfy
+            app.root.current = "mainScreen"
+            app.runApp()
+
+<MainScreen>:
+    name: "mainScreen"
+    Image:
+        size: root.size
+        source: "pics/envirement.jpg"
+
+    GraphDrawer:
+        id: graphDrawer
+
+        canvas.before:
+            PushMatrix:
+
+            Line:
+                width: 2.
+                points: self.graphList
+        canvas.after:
+            PopMatrix:
+
+
+
+    FloatLayout:
+
+        Base:
+            source: "pics/Base.png"
+            pos: -200, 50
+
+        LegOne:
+            id: legOne
+            size: self.size
+            source: "pics/Leg.png"
+            pos: self.xPos, self.yPos
+            canvas.before:
+                PushMatrix:
+                Rotate:
+                    angle: self.angle
+                    origin: self.center
+            canvas.after:
+                PopMatrix:
+
+
+        LegTwo:
+            id: legTwo
+            size: self.size
+            source: "pics/Leg.png"
+            pos: self.xPos, self.yPos
+            canvas.before:
+                PushMatrix:
+                Rotate:
+                    angle: self.angle
+                    origin: self.center
+            canvas.after:
+                PopMatrix:
+        Label:
+            pos: -root.width/2 +57, root.height/2 -50
+            text: "Leg 1"
+        Label:
+            pos: -root.width/2 +133, root.height/2 -50
+            text: "Leg 2"
+        GridLayout:
+            cols: 1
+            GridLayout:
+                size_hint: None, None
+                size: 150, root.height-100
+                pos: 20,33
+                cols: 2
+
+                Slider:
+                    id: LegOneSlider
+                    min: -180
+                    max: 180
+                    step: 1
+                    orientation: 'vertical'
+                Slider:
+                    id: LegTwoSlider
+                    min: -180
+                    max: 180
+                    step: 1
+                    orientation: 'vertical'
+            GridLayout:
+                cols: 1
+                Button:
+                    text: "auto/man"
+                    on_press:
+                        app.ControlUnit()
+        PinPoint:#only used for testing
+            id: pp
+
+            canvas.before:
+                PushMatrix:
+                #Rectangle:
+                    #pos: self.xPos, self.yPos
+                    #size: 10,10
+            canvas.after:
+                PopMatrix:
